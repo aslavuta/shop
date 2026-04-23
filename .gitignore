@@ -480,3 +480,8 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# LiteDB local database files
+DocumentDB/
+*.db
+*.db-log
