@@ -1,0 +1,18 @@
+<Solution>
+  <Folder Name="/Application/">
+    <Project Path="Shop.Application/Shop.Application.csproj" />
+  </Folder>
+  <Folder Name="/Domain/">
+    <Project Path="Domain.Core/Shop.Domain.Core.csproj" />
+  </Folder>
+  <Folder Name="/Infrastructure/">
+    <Project Path="Shop.DataAccess.LightDB/Shop.DataAccess.LightDB.csproj" />
+  </Folder>
+  <Folder Name="/Presentation/">
+    <Project Path="Shop/Shop.csproj" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="Shop.UnitTests/Shop.UnitTests.csproj" />
+    <Project Path="Shop.IntegrationTests/Shop.IntegrationTests.csproj" />
+  </Folder>
+</Solution>
