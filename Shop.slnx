@@ -9,7 +9,7 @@
     <Project Path="Shop.DataAccess.LightDB/Shop.DataAccess.LightDB.csproj" />
   </Folder>
   <Folder Name="/Presentation/">
-    <Project Path="Shop/ShopAPI.csproj" />
+    <Project Path="Shop.API/Shop.API.csproj" />
   </Folder>
   <Folder Name="/Tests/">
     <Project Path="Shop.IntegrationTests/Shop.IntegrationTests.csproj" Id="b2b64538-7ffa-46f0-97e8-58f42c72f99e" />
