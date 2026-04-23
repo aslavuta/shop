@@ -12,7 +12,7 @@
     <Project Path="Shop/Shop.csproj" />
   </Folder>
   <Folder Name="/Tests/">
-    <Project Path="Shop.UnitTests/Shop.UnitTests.csproj" />
-    <Project Path="Shop.IntegrationTests/Shop.IntegrationTests.csproj" />
+    <Project Path="Shop.IntegrationTests/Shop.IntegrationTests.csproj" Id="b2b64538-7ffa-46f0-97e8-58f42c72f99e" />
+    <Project Path="Shop.UnitTests/Shop.UnitTests.csproj" Id="f8a92cea-918b-47f5-a332-217566e7e6db" />
   </Folder>
 </Solution>
