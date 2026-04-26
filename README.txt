@@ -6,4 +6,7 @@ We can:
 | Add a new entities/aggregate (Order, Product, …)  
 | Alternate the host (gRPC, worker, CLI) 
 
-Current solution is not async due to sync nature of LiteDB
+Task 2 Extensibility cover nest poins:
+- We can still switch our SQL DB to any other
+- Repositories are isolated and can be substituted without any changes in the Application layer
+- extendable with any other entities to be added
