@@ -8,6 +8,8 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Shop.Application\Shop.Application.csproj" />
     <ProjectReference Include="..\Shop.DataAccess.LightDB\Shop.DataAccess.LightDB.csproj" />
+    <ProjectReference Include="..\Shop.DataAccess.SQLDB\Shop.DataAccess.SQLDB.csproj" />
   </ItemGroup>
 </Project>

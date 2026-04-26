@@ -485,3 +485,9 @@ $RECYCLE.BIN/
 DocumentDB/
 *.db
 *.db-log
+
+# SQL Server LocalDB database files
+RelationalDB/
+.gitkeep
+*.mdf
+*.ldf

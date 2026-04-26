@@ -7,6 +7,7 @@
   </Folder>
   <Folder Name="/Infrastructure/">
     <Project Path="Shop.DataAccess.LightDB/Shop.DataAccess.LightDB.csproj" />
+    <Project Path="Shop.DataAccess.SQLDB/Shop.DataAccess.SQLDB.csproj" Id="b1222d43-c5a3-4583-ab2e-60a47fe5dad1" />
   </Folder>
   <Folder Name="/Presentation/">
     <Project Path="Shop.API/Shop.API.csproj" />

@@ -10,6 +10,7 @@
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.4" />
     <PackageReference Include="LiteDB" Version="5.0.21" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.7" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
     <PackageReference Include="xunit" Version="2.9.3" />
     <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4" />
@@ -23,6 +24,7 @@
     <ProjectReference Include="..\Domain.Core\Shop.Domain.Core.csproj" />
     <ProjectReference Include="..\Shop.Application\Shop.Application.csproj" />
     <ProjectReference Include="..\Shop.DataAccess.LightDB\Shop.DataAccess.LightDB.csproj" />
+    <ProjectReference Include="..\Shop.DataAccess.SQLDB\Shop.DataAccess.SQLDB.csproj" />
   </ItemGroup>
 
 </Project>
