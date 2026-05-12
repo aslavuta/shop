@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Shop.Application.Abstractions;
+using Shop.Application.Common;
 using Shop.Domain.Core;
 
 namespace Shop.DataAccess.SQLDB;
@@ -16,6 +17,28 @@ internal sealed class ProductRepository : IProductRepository
     public Product? GetById(int id) => _db.Products.Find(id);
 
     public IReadOnlyList<Product> List() => _db.Products.AsNoTracking().ToList();
+
+    public PagedResult<Product> List(int? categoryId, int page, int pageSize)
+    {
+        var query = _db.Products.AsNoTracking();
+        if (categoryId is { } cid)
+            query = query.Where(p => p.CategoryId == cid);
+
+        var total = query.Count();
+        var items = query
+            .OrderBy(p => p.Id)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
+
+        return new PagedResult<Product>
+        {
+            Items = items,
+            Page = page,
+            PageSize = pageSize,
+            TotalCount = total,
+        };
+    }
 
     public int Add(Product product)
     {

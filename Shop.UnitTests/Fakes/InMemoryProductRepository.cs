@@ -1,4 +1,5 @@
 using Shop.Application.Abstractions;
+using Shop.Application.Common;
 using Shop.Domain.Core;
 
 namespace Shop.UnitTests.Fakes;
@@ -11,6 +12,24 @@ internal sealed class InMemoryProductRepository : IProductRepository
     public Product? GetById(int id) => _store.GetValueOrDefault(id);
 
     public IReadOnlyList<Product> List() => _store.Values.ToList();
+
+    public PagedResult<Product> List(int? categoryId, int page, int pageSize)
+    {
+        IEnumerable<Product> query = _store.Values;
+        if (categoryId is { } cid)
+            query = query.Where(p => p.CategoryId == cid);
+
+        var ordered = query.OrderBy(p => p.Id).ToList();
+        var items = ordered.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+        return new PagedResult<Product>
+        {
+            Items = items,
+            Page = page,
+            PageSize = pageSize,
+            TotalCount = ordered.Count,
+        };
+    }
 
     public int Add(Product product)
     {

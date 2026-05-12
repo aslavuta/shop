@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Shop.Application.Common;
 using Shop.Application.Services;
 using Shop.Domain.Core;
 
@@ -16,9 +17,12 @@ namespace Shop.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IReadOnlyList<Product>> List()
+        public ActionResult<PagedResult<Product>> List(
+            [FromQuery] int? categoryId = null,
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 20)
         {
-            return Ok(_service.List());
+            return Ok(_service.List(categoryId, page, pageSize));
         }
 
         [HttpGet("{id:int}")]

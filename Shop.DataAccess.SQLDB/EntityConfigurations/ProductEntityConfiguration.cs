@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Shop.Domain.Core;
 
@@ -14,6 +14,11 @@ namespace Shop.DataAccess.SQLDB.EntityConfigurations
             builder.Property(p => p.Price).IsRequired().HasPrecision(18, 2);
             builder.Property(p => p.Amount).IsRequired();
             builder.Property(p => p.CategoryId).IsRequired();
+
+            builder.HasOne(p => p.Category)
+                .WithMany()
+                .HasForeignKey(p => p.CategoryId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
