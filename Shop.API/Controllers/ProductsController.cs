@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Shop.API.Hateoas;
 using Shop.Application.Common;
 using Shop.Application.Services;
 using Shop.Domain.Core;
@@ -26,10 +27,21 @@ namespace Shop.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public ActionResult<Product> Get(int id)
+        public ActionResult<LinkedResource<Product>> Get(int id)
         {
             var product = _service.Get(id);
-            return product is null ? NotFound() : Ok(product);
+            if (product is null)
+                return NotFound();
+
+            var links = new Dictionary<string, Link>
+            {
+                ["self"] = new(Url.Action(nameof(Get), new { id })!, "GET"),
+                ["category"] = new(Url.Action("Get", "Categories", new { id = product.CategoryId })!, "GET"),
+                ["update"] = new(Url.Action(nameof(Update), new { id })!, "PUT"),
+                ["delete"] = new(Url.Action(nameof(Delete), new { id })!, "DELETE"),
+            };
+
+            return Ok(new LinkedResource<Product> { Data = product, Links = links });
         }
 
         [HttpPost]
