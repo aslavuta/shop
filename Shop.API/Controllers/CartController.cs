@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Application.Services;
 using Shop.Domain.Core;
@@ -6,6 +7,7 @@ using Shop.Domain.Core.Exceptions;
 namespace Shop.Controllers
 {
     [ApiController]
+    [ApiVersion("1.0")]
     [Route("api/carts/{cartId:guid}/items")]
     public class CartController : ControllerBase
     {

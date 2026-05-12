@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using Shop.API.Hateoas;
 using Shop.Application.Common;
@@ -7,6 +8,7 @@ using Shop.Domain.Core;
 namespace Shop.Controllers
 {
     [ApiController]
+    [ApiVersion("1.0")]
     [Route("api/products")]
     public class ProductsController : ControllerBase
     {
