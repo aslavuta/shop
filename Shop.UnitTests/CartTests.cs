@@ -9,7 +9,7 @@ namespace Shop.UnitTests
         public void AddItem_WhenItemIsNew_AddsItToCart()
         {
             // Arrange
-            var cart = new Cart { Id = Guid.NewGuid() };
+            var cart = new Cart { Id = "cart1" };
             var item = new CartItem { Id = 1, Name = "Book", Price = 9.99m };
 
             // Act
