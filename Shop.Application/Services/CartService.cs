@@ -12,26 +12,36 @@ internal sealed class CartService : ICartService
         _repository = repository;
     }
 
-    public IReadOnlyList<CartItem> GetItems(Guid cartId)
+    public Cart GetCart(string cartKey)
     {
-        var cart = _repository.GetById(cartId);
+        ArgumentException.ThrowIfNullOrWhiteSpace(cartKey);
+        return _repository.GetById(cartKey) ?? new Cart { Id = cartKey };
+    }
+
+    public IReadOnlyList<CartItem> GetItems(string cartKey)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(cartKey);
+        var cart = _repository.GetById(cartKey);
         return cart?.Items.ToList() ?? [];
     }
 
-    public int AddItem(Guid cartId, CartItem item)
+    public int AddItem(string cartKey, CartItem item)
     {
+        ArgumentException.ThrowIfNullOrWhiteSpace(cartKey);
         ArgumentNullException.ThrowIfNull(item);
 
-        var cart = _repository.GetById(cartId) ?? new Cart { Id = cartId };
+        var cart = _repository.GetById(cartKey) ?? new Cart { Id = cartKey };
         cart.AddItem(item);
         _repository.Save(cart);
 
         return item.Id;
     }
 
-    public bool RemoveItem(Guid cartId, int itemId)
+    public bool RemoveItem(string cartKey, int itemId)
     {
-        var cart = _repository.GetById(cartId);
+        ArgumentException.ThrowIfNullOrWhiteSpace(cartKey);
+
+        var cart = _repository.GetById(cartKey);
         if (cart is null)
         {
             return false;

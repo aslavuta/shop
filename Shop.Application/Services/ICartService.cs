@@ -4,9 +4,11 @@ namespace Shop.Application.Services;
 
 public interface ICartService
 {
-    IReadOnlyList<CartItem> GetItems(Guid cartId);
+    Cart GetCart(string cartKey);
 
-    int AddItem(Guid cartId, CartItem item);
+    IReadOnlyList<CartItem> GetItems(string cartKey);
 
-    bool RemoveItem(Guid cartId, int itemId);
+    int AddItem(string cartKey, CartItem item);
+
+    bool RemoveItem(string cartKey, int itemId);
 }

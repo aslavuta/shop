@@ -15,7 +15,7 @@ internal sealed class CartRepository : ICartRepository
         _collection = database.GetCollection<Cart>(CollectionName);
     }
 
-    public Cart? GetById(Guid id) => _collection.FindById(id);
+    public Cart? GetById(string id) => _collection.FindById(id);
 
     public void Save(Cart cart)
     {

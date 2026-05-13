@@ -19,6 +19,11 @@ internal sealed class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOpti
         }
 
         options.OperationFilter<ApiVersionHeaderOperationFilter>();
+
+        foreach (var xml in Directory.EnumerateFiles(AppContext.BaseDirectory, "*.xml", SearchOption.TopDirectoryOnly))
+        {
+            options.IncludeXmlComments(xml, includeControllerXmlComments: true);
+        }
     }
 
     private static OpenApiInfo CreateInfo(ApiVersionDescription description)
@@ -27,7 +32,7 @@ internal sealed class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOpti
         {
             Title = "Shop Catalog API",
             Version = description.ApiVersion.ToString(),
-            Description = "REST API for the Shop catalog (categories and products).",
+            Description = "REST API for the Shop catalog and shopping carts.",
         };
 
         if (description.IsDeprecated)

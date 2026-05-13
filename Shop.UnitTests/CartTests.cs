@@ -10,7 +10,12 @@ namespace Shop.UnitTests
         {
             // Arrange
             var cart = new Cart { Id = "cart1" };
-            var item = new CartItem { Id = 1, Name = "Book", Price = 9.99m };
+            var item = new CartItem
+            {
+                Id = 1,
+                Name = "Book",
+                Price = 9.99m,
+            };
 
             // Act
             cart.AddItem(item);
@@ -24,7 +29,7 @@ namespace Shop.UnitTests
         public void AddItem_WhenItemIsNull_ThrowsArgumentNullException()
         {
             // Arrange
-            var cart = new Cart { Id = Guid.NewGuid() };
+            var cart = new Cart { Id = "cart1" };
 
             // Act + Assert
             Assert.Throws<ArgumentNullException>(() => cart.AddItem(null!));
@@ -34,9 +39,19 @@ namespace Shop.UnitTests
         public void AddItem_WhenItemWithSameIdAlreadyExists_ThrowsDuplicateEntityException()
         {
             // Arrange
-            var cart = new Cart { Id = Guid.NewGuid() };
-            var first = new CartItem { Id = 1, Name = "Book", Price = 9.99m };
-            var duplicate = new CartItem { Id = 1, Name = "Another Book", Price = 14.99m };
+            var cart = new Cart { Id = "cart1" };
+            var first = new CartItem
+            {
+                Id = 1,
+                Name = "Book",
+                Price = 9.99m,
+            };
+            var duplicate = new CartItem
+            {
+                Id = 1,
+                Name = "Another Book",
+                Price = 14.99m,
+            };
             cart.AddItem(first);
 
             // Act + Assert

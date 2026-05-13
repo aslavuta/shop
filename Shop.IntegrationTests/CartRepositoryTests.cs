@@ -20,7 +20,7 @@ namespace Shop.IntegrationTests
         [Fact]
         public void GetById_WhenCartDoesNotExist_ReturnsNull()
         {
-            var result = _repository.GetById(Guid.NewGuid());
+            var result = _repository.GetById("missing-cart");
 
             Assert.Null(result);
         }
@@ -29,8 +29,8 @@ namespace Shop.IntegrationTests
         public void Save_ThenGetById_RoundTripsCartWithItems()
         {
             // Arrange
-            var cartId = Guid.NewGuid();
-            var cart = new Cart { Id = cartId };
+            var cartKey = "session-42";
+            var cart = new Cart { Id = cartKey };
             cart.AddItem(new CartItem
             {
                 Id = 42,
@@ -42,11 +42,11 @@ namespace Shop.IntegrationTests
 
             // Act
             _repository.Save(cart);
-            var loaded = _repository.GetById(cartId);
+            var loaded = _repository.GetById(cartKey);
 
             // Assert
             Assert.NotNull(loaded);
-            Assert.Equal(cartId, loaded!.Id);
+            Assert.Equal(cartKey, loaded!.Id);
 
             var item = Assert.Single(loaded.Items);
             Assert.Equal(42, item.Id);
@@ -62,20 +62,20 @@ namespace Shop.IntegrationTests
         public void Save_WhenCartAlreadyExists_UpsertsInsteadOfDuplicating()
         {
             // Arrange
-            var cartId = Guid.NewGuid();
-            var cart = new Cart { Id = cartId };
+            var cartKey = "session-upsert";
+            var cart = new Cart { Id = cartKey };
             cart.AddItem(new CartItem { Id = 1, Name = "A", Price = 1m, Quantity = 1 });
             _repository.Save(cart);
 
             // Act — reload, mutate, save again
-            var reloaded = _repository.GetById(cartId)!;
+            var reloaded = _repository.GetById(cartKey)!;
             reloaded.AddItem(new CartItem { Id = 2, Name = "B", Price = 2m, Quantity = 3 });
             _repository.Save(reloaded);
 
             // Assert
-            var finalCart = _repository.GetById(cartId);
+            var finalCart = _repository.GetById(cartKey);
             Assert.NotNull(finalCart);
-            Assert.Equal(cartId, finalCart!.Id);
+            Assert.Equal(cartKey, finalCart!.Id);
             Assert.Equal(2, finalCart.Items.Count);
             Assert.Contains(finalCart.Items, i => i.Id == 1 && i.Name == "A");
             Assert.Contains(finalCart.Items, i => i.Id == 2 && i.Name == "B");
